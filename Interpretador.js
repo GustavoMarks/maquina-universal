@@ -1,4 +1,6 @@
-class Ìnterpretador {
+const fs = require('fs');
+
+class Interpretador {
 	constructor() {
 		// Tarefa 2 e 3
 		this.PC = 0;
@@ -79,4 +81,26 @@ class Ìnterpretador {
 
 		}
 	}
+
+	// Tafera 5
+	Universal(nomeArquivoPrograma, nomeArquivoEntradas) {
+		fs.readFile(nomeArquivoEntradas, 'utf8', (err, entradasString) => {
+			if (err) throw new Error("Falha ao tentar ler o arquivo de entradas");
+			this.inicializa(entradasString);
+
+			fs.readFile(nomeArquivoPrograma, 'utf8', (err, instrucoesString) => {
+				if (err) throw new Error("Falha ao tentar ler o arquivo do programa");
+				const instrucoes = String(instrucoesString).split('\n');
+				const maxLinha = instrucoes.length;
+
+				while (this.PC < maxLinha) {
+					this.exec_inst(instrucoes[this.PC]);
+				}
+
+				return this.W[0];
+			});
+		});
+	}
 }
+
+module.exports = Interpretador;
