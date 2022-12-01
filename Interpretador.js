@@ -44,18 +44,31 @@ class Interpretador {
 	}
 
 	// Tarefa 2
-	max_var() {
-		return this.W.length;
+	max_var([...programa]) {
+		let max = 0;
+		programa.forEach(instrucao => {
+			const { variavel } = this.ler_instrucao(instrucao);
+			const variavelIndice = parseInt(String(variavel).substring(1)) // removendo "w"
+			if (variavelIndice > max) max = variavelIndice;
+		});
+
+		return max;
 	}
 
 	// Tarefa 3
 	// Ex.: 7,2,55,2,31
-	inicializa(entradasString) {
+	inicializa(entradasString, instrucoes) {
 		try {
 			const entradasArray = String(entradasString).split(",");
 			entradasArray.forEach(entrada => {
 				this.W.push(parseInt(entrada));
 			});
+
+			const max_var = this.max_var(instrucoes);
+			while (this.W.length < max_var + 1) {
+				this.W.push(0);
+			}
+
 		} catch (error) {
 			throw new Error(`Falha na incialização com lista de entradas: ${entradasString}`);
 		}
@@ -86,18 +99,20 @@ class Interpretador {
 	Universal(nomeArquivoPrograma, nomeArquivoEntradas) {
 		fs.readFile(nomeArquivoEntradas, 'utf8', (err, entradasString) => {
 			if (err) throw new Error("Falha ao tentar ler o arquivo de entradas");
-			this.inicializa(entradasString);
 
 			fs.readFile(nomeArquivoPrograma, 'utf8', (err, instrucoesString) => {
 				if (err) throw new Error("Falha ao tentar ler o arquivo do programa");
 				const instrucoes = String(instrucoesString).split('\n');
+				this.inicializa(entradasString, instrucoes);
+
 				const maxLinha = instrucoes.length;
 
 				while (this.PC < maxLinha) {
 					this.exec_inst(instrucoes[this.PC]);
 				}
 
-				return this.W[0];
+				// console.log(this.W);
+				fs.writeFile('saida.txt', this.W[0], 'utf8', () => null);
 			});
 		});
 	}
