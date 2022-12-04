@@ -85,6 +85,7 @@ class Interpretador {
 			this.PC += 1;
 
 		} else if (tipo === "decremento") {
+			if (this.W[variavelIndice] - 1 < 0) throw new Error('Decremento negativo não permitido');
 			this.W[variavelIndice] -= 1;
 			this.PC += 1;
 
@@ -109,9 +110,10 @@ class Interpretador {
 
 				while (this.PC < maxLinha) {
 					this.exec_inst(instrucoes[this.PC]);
+					console.log(this.W);
+					console.log(this.PC);
 				}
 
-				// console.log(this.W);
 				fs.writeFile('saida.txt', this.W[0], 'utf8', () => null);
 			});
 		});
