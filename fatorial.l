@@ -1,39 +1,44 @@
-if w1 =/= 0 goto 3
+w6 ← w6 + 1            // Verificando fatorial de zero e 1
+if w1 =/= 0 goto 4
 w0 ← w0 + 1
 if w0 =/= 0 goto 100
-w1 ← w1 - 1                   // Passando o valor original da entrada para outras variaveis
-w2 ← w2 + 1                   // Irá guardar o próximo fatorial
-w3 ← w3 + 1                   // Irá servir de contador para multiplicação
-w4 ← w4 + 1                   // Irá salvar o valor da entrada sem alteração
-if w1 =/= 0 goto 3
-w2 ← w2 - 1										// Multiplica n por n - 1
-if w2 =/= 0 goto 12
-if w3 =/= 0 goto 24
+w1 ← w1 - 1
+if w1 =/= 0 goto 8
 w0 ← w0 + 1
-w3 ← w3 - 1
-if w3 =/= 0 goto 11
+if w6 =/= 0 goto 100
+w1 ← w1 - 1            // Salvando valor da entrada para multiplicação
+w2 ← w2 + 1
 w3 ← w3 + 1
-w4 ← w4 - 1
+if w0 =/= 0 goto 14
+w4 ← w4 + 1              // Caso esteja no início da recursão, deixar o valor da entrada mais um acumuado 
+w5 ← w5 + 1
+if w1 =/= 0 goto 8
 w1 ← w1 + 1
-if w4 =/= 0 goto 14
-w4 ← w4 + 1
-w1 ← w1 - 1
-if w1 =/= 0 goto 18
-if w2 =/= 0 goto 8
-w4 ← w4 - 1                  // Indo para fatorial de n - 1
-w1 ← w1 + 1
-if w4 =/= 0 goto 22
-w1 ← w1 - 1
-if w2 =/= 0 goto 30
-if w3 =/= 0 goto 32
-if w4 =/= 0 goto 34
-if w0 =/= 0 goto 36
-w2 ← w2 - 1
-if w0 =/= 0 goto 26
 w3 ← w3 - 1
-if w0 =/= 0 goto 26
+if w3 =/= 0 goto 15
+if w0 =/= 0 goto 22
+w4 ← w4 + 1              // Caso esteja no início da recursão, deixar o valor da entrada mais um acumuado 
+w5 ← w5 + 1
+if w6 =/= 0 goto 26
+w0 ← w0 - 1            // Salvando cópias do valor acumulado para multiplicação com soma num laço
+w4 ← w4 + 1 
+w5 ← w5 + 1
+if w0 =/= 0 goto 22
+w0 ← w0 + 1            // Somando o valor acumulado salvo anterior mente um número de vezes igual ao salvo no w2
 w4 ← w4 - 1
-if w0 =/= 0 goto 26
-if w1 =/= 0 goto 3
-if w0 =/= 0 goto 100
-w0 ← w0 + 1
+if w4 =/= 0 goto 26
+w2 ← w2 - 1
+if w2 =/= 0 goto 32
+if w6 =/= 0 goto 40
+w4 ← w4 + 1            // Recuperando o valor de 4 para a próxima interação a partir de 5
+w5 ← w5 - 1
+w3 ← w3 + 1
+if w5 =/= 0 goto 32
+w5 ← w5 + 1
+w3 ← w3 - 1
+if w3 =/= 0 goto 36
+if w6 =/= 0 goto 26
+w5 ← w5 - 1            // resetando variavel para próxima iteração
+if w5 =/= 0 goto 40
+w1 ← w1 - 1
+if w1 =/= 0 goto 8

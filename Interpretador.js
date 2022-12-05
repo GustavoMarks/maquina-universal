@@ -110,11 +110,11 @@ class Interpretador {
 
 				while (this.PC < maxLinha) {
 					this.exec_inst(instrucoes[this.PC]);
-					console.log(this.W);
-					console.log(this.PC);
+					// console.log(this.W);
+					// console.log(this.PC);
 				}
 
-				fs.writeFile('saida.txt', this.W[0], 'utf8', () => null);
+				fs.writeFile('saida.txt', String(this.W[0]), 'utf8', () => null);
 			});
 		});
 	}
